@@ -3,6 +3,7 @@ import React from "react";
 
 const AdminLayout = ({children}) => {
     const {component} = usePage();
+    const { auth } = usePage().props;
     return (
         <>
             <header className="bg-black text-white py-8">
@@ -21,7 +22,7 @@ const AdminLayout = ({children}) => {
                                 >
                                     Dashboard
                                 </Link>
-                                
+
                                 <Link 
                                     href="/todo" 
                                     className={`${
@@ -35,7 +36,7 @@ const AdminLayout = ({children}) => {
                             </div>
 
                             <div>
-                                User
+                                {auth.user.name}
                             </div>
                         </nav>
                     </div>
