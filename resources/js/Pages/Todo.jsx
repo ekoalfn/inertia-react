@@ -1,13 +1,45 @@
 import AdminLayout from "@/Layouts/AdminLayout";
+import { router, useForm, usePage } from "@inertiajs/react";
+import React from "react";
 
-export default function Todo() {
+const Todo = () => {
+
+    const { flash } = usePage().props;
+
+    const {data, setData, reset} =  useForm({
+        name: "",
+    });
+    
+    const storeTodo = (e) =>{
+        e.preventDefault();
+        router.post('/todo', data, {
+            onSuccess: () => {
+                reset();
+            },
+        })
+    };
+
+
     return (
        <AdminLayout>
             <div className="max-w-4xl mx-auto">
                 <h2 className="font-semibold text-4xl my-8 text-center">Todo App</h2>
-                <form>
+
+                {flash.message && (
+                    <div className="py-2 px-4 rounded-md bg-green-300 text-center mb-6">
+                        {flash.message}
+                    </div>
+                )}
+
+                <form onSubmit={storeTodo}>
                     <div className="flex gap-4 items-center mb-6">
-                        <input type="text" placeholder="Enter todo here" className="px-4 py-2 rounded-md grow"/>
+                        <input 
+                            type="text" 
+                            placeholder="Enter todo here" 
+                            className="px-4 py-2 rounded-md grow" 
+                            onChange={(e) => setData('name', e.target.value)}
+                            value={data.name}
+                        />
                         <button className="py-2 px-4 rounded-md bg-indigo-500">Save</button>
                     </div>
                 </form>
@@ -30,3 +62,5 @@ export default function Todo() {
        </AdminLayout>
     );
 }
+
+export default Todo;
