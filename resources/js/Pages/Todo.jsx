@@ -1,3 +1,4 @@
+import Pagination from "@/Components/Pagination";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { router, useForm, usePage } from "@inertiajs/react";
 import React from "react";
@@ -70,6 +71,9 @@ const Todo = () => {
                             <FaRegTrashAlt size={18}/>
                         </div>
                     </div>
+                </div>
+                <div className="mt-8 flex justify-end items-center">
+                    <Pagination/>
                 </div>
             </div>
        </AdminLayout>
