@@ -9,7 +9,9 @@ use Inertia\Inertia;
 class TodoController extends Controller
 {
     public function index(){
-        return Inertia::render('Todo');
+        return Inertia::render('Todo',[
+            'todos' => Todo::latest()->paginate(4),
+        ]);
     }
 
     public function store(Request $request){
